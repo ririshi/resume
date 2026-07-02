@@ -7,7 +7,7 @@
 }
 
 .highlight {
-  @apply bg-husky-100 dark:bg-husky-900;
+  @apply bg-husky-100 dark:bg-husky-900 print:bg-transparent;
 }
 
 .with-border {
@@ -28,4 +28,29 @@
 
 .work-entry:nth-child(odd) .dot-bg {
   @apply left-0 -translate-x-2/4;
+}
+
+@media print {
+  /* Remove margin to prevent url/timestamp from being printed there */
+  @page {
+    size: auto;
+    margin: 0mm;
+    padding: 15mm 10mm 10mm;
+  }
+
+  /* Avoid breaking right after a header */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    break-after: avoid-page;
+  }
+
+  /* Also print colored backgrounds */
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }
